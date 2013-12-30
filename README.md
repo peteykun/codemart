@@ -10,4 +10,6 @@ This is a web app to host a coding competition where users can sell and purchase
 
 * Provides an interface to submit 'runs' of programs to check, a successful run earns money.
 
-* Allows posting of requests for solutions to programs, and responses to such requests which may be purchased for money.
+* Allows users to post requests for solutions to programs
+
+* Allows other users to respond to such requests (which may be purchased for money).
