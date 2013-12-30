@@ -3,4 +3,8 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_secure_password
+
+  def is_admin?
+    return false
+  end
 end
