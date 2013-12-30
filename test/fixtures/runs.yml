@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyText
+  output: MyText
+  success: false
+  program_id: 1
+
+two:
+  code: MyText
+  output: MyText
+  success: false
+  program_id: 1
