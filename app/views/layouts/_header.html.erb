@@ -14,17 +14,13 @@
         <li><%= link_to 'Home' %></li>
 
         <% if current_user %>
-        <li><%= link_to 'My Partner', '/matcher/show' %></li>
-          
-          <% if current_user.is_admin? %>
-          <li><%= link_to 'Generate Pairs', '/matcher/generate' %>
-          <% end %>
+        <%= nav_link 'Programs', 'programs', controller: true %>
        
-        <li><%= link_to 'Logout', logout_path %></li>
+        <%= nav_link 'Logout', logout_path %>
         <% else %>
 
-        <li><%= link_to 'Login', login_path %></li>
-        <li><%= link_to 'Register', register_path %></li>
+        <%= nav_link 'Login', login_path, alternative_paths: [sessions_path] %>
+        <%= nav_link 'Register', register_path %>
         <% end %>
       </ul>
     </div>

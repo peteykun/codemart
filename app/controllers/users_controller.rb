@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-  before_action :check_if_logged_in, only: [:new, :create]
+  before_action :redirect_if_logged_in, only: [:new, :create]
 
   # Leaderboard:    index
   # Registration:   new, create
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def check_if_logged_in
+    def redirect_if_logged_in
       if current_user
         redirect_to root_url
       end

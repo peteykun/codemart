@@ -1,4 +1,14 @@
-<p id="notice"><%= notice %></p>
+<ul class="nav nav-tabs">
+  <% @programs.each do |program| %>
+    <%= nav_link program.name, program %>
+  <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_program_path(@program) %> |
-<%= link_to 'Back', programs_path %>
+<br>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Problem Statement</div>
+	<div class="panel-body">
+		<%= raw BlueCloth.new(@program.statement).to_html %>
+	</div>
+</div>

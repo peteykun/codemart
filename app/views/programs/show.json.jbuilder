@@ -1,1 +1,2 @@
-json.extract! @program, :id, :created_at, :updated_at
+json.extract! @program, :id, :name
+json.statement BlueCloth.new(@program.statement).to_html
