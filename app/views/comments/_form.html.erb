@@ -13,6 +13,13 @@
     <%= f.text_area :content, class: "form-control", style: "height: 400px;" %>
   </div>
 
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Price (coins)</span>
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= f.hidden_field :post_id %>
     <%= f.submit nil, class: 'btn btn-success' %>

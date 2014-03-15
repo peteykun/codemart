@@ -14,3 +14,27 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function bind_buy() {
+  $('.buy-button').on('click', function(event) {
+    var url = $(event.target).data('comment-buy-path') + '.json';
+
+    $.post(url, function(response) {
+      if(response.success)
+        window.location.href = window.location.href;
+      else
+        alert(response.error);
+    });
+  });
+
+  $('.report-button').on('click', function(event) {
+    var url = $(event.target).data('comment-report-path') + '.json';
+
+    $.post(url, function(response) {
+      alert("Comment successfully reported.");
+    });
+  });
+}
+
+$(document).ready(bind_buy);
+$(document).on('page:load', bind_buy);

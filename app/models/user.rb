@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   
   has_many :programs
   has_many :comments
+  has_and_belongs_to_many :purchased_comments, class_name: 'Comment', join_table: 'buyers_purchased_comments'
 
   has_secure_password
 

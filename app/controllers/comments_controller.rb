@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :buy, :report]
 
   # GET /comments
   # GET /comments.json
@@ -19,6 +19,24 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+  end
+
+  def buy
+    @own = @comment.have_rights?(current_user)
+    @enough_money = current_user.money >= @comment.price
+    
+    if !@own and @enough_money
+      @comment.buyers << current_user
+      @comment.save
+
+      current_user.money -= @comment.price
+      current_user.save
+    end
+  end
+
+  def report
+    @comment.reported = true
+    @comment.save
   end
 
   # POST /comments
@@ -70,6 +88,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :post_id)
+      params.require(:comment).permit(:content, :post_id, :price)
     end
 end

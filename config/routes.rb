@@ -14,6 +14,9 @@ CodeMart::Application.routes.draw do
   match '/login',     to: 'sessions#new',       via: 'get'
   match '/logout',    to: 'sessions#destroy',   via: 'get'
 
+  post  '/comments/buy/:id' => 'comments#buy', as: :comment_buy
+  post  '/comments/report/:id' => 'comments#report', as: :comment_report
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

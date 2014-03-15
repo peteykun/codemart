@@ -48,6 +48,8 @@
 <% for comment in @post.comments.order('id desc') %>
 	<div class="panel panel-default">
     <div class="panel-body">
+      
+      <% if comment.have_rights?(current_user) %>
       <%= raw BlueCloth.new(comment.content).to_html %>
       <hr>
       <p class="pull-left">
@@ -55,12 +57,19 @@
           <%= link_to 'Edit comment', edit_comment_path(comment), class: 'btn btn-primary' %>
           <%= link_to 'Delete comment', comment, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger' %>
         <% else %>
-          <%= link_to 'Report comment', nil, class: 'btn btn-danger' %>
+          <button class="btn btn-danger report-button" data-comment-report-path="<%= comment_report_path(comment.id) %>">Report comment</button>
         <% end %>
       </p>
       <p class="pull-right left_by">
         <i>Response left by <b><%= comment.user.username %></b> <%= time_ago_in_words comment.created_at %> ago.</i>
       </p>
+      <% else %>
+        <div class="paid_response">
+          <i><%= comment.user.username %> left a paid response.</i><br>
+          <button class="btn btn-warning buy-button" data-comment-buy-path="<%= comment_buy_path(comment.id) %>">Buy it for <%= pluralize comment.price, "coin" %></button>
+        </div>
+      <% end %>
+
     </div>
   </div>
 <% end %>
@@ -81,6 +90,13 @@
 
   <div class="form-group">
     <%= f.text_area :content, class: "form-control", style: "height: 100px;" %>
+  </div>
+
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon">Price (coins)</span>
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
   </div>
 
   <div class="actions">

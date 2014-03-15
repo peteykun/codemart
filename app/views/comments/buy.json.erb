@@ -1,0 +1,15 @@
+<% if @own %>
+{
+  "success": false,
+  "error": "You already have rights to this comment."
+}
+<% elsif !@enough_money %>
+{
+  "success": false,
+  "error": "You don't have enough money to buy this comment."
+}
+<% else %>
+{
+  "success": true
+}
+<% end %>
