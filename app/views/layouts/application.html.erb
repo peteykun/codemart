@@ -8,11 +8,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    
+    <div class="wrapper">
+      <%= render 'layouts/header' %>
+      
+      <div class="container">
+        <%= yield %>
+      </div>
 
-	<%= render 'layouts/header' %>
-    <div class="container">
-      <%= yield %>
+      <div class="push"></div>
     </div>
+
+    <footer>
+    	&copy; 2014 <%= link_to 'CUrBrain', 'http://curbrain.geekonix.org' %>.
+    </footer>
 
 </body>
 </html>

@@ -1,4 +1,51 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @run.program.name %></h1>
+<hr>
 
-<%= link_to 'Edit', edit_run_path(@run) %> |
-<%= link_to 'Back', runs_path %>
+<% if @run.success %>
+<div class="alert alert-success">
+  <span class="glyphicon glyphicon glyphicon-ok"></span>
+  Your program executed successfully for our input set!
+</div>
+<% else %>
+<div class="alert alert-danger">
+  <span class="glyphicon glyphicon glyphicon-remove"></span>
+  Your program did not work for our input set!
+</div>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Problem Statement</div>
+  <div class="panel-body">
+    <%= raw BlueCloth.new(@run.program.statement).to_html %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Your code</div>
+  <div class="panel-body">
+    <pre class="prettyprint simple"><%= @run.code %></pre>
+  </div>
+</div>
+
+<% if @run.success %>
+<div class="panel panel-default">
+  <div class="panel-heading">Test Input</div>
+  <div class="panel-body">
+    <pre class="simple"><%= @run.program.input %></pre>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Test Output</div>
+  <div class="panel-body">
+    <pre class="simple"><%= @run.program.output %></pre>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Your Output</div>
+  <div class="panel-body">
+    <pre class="simple"><%= @run.output %></pre>
+  </div>
+</div>
+<% end %>

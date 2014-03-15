@@ -1,5 +1,9 @@
 <h1>New run</h1>
+<hr>
+
+<div class="alert alert-info">
+  <span class="glyphicon glyphicon glyphicon-warning-sign"></span> 
+  You are submitting a run for the program <b><%= @run.program.name %></b> (<i>worth <%= @run.program.reward %> coins</i>).
+</div>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', runs_path %>

@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   def is_admin?
     return false
   end
+
+  def score
+    return karma * money
+  end
 end

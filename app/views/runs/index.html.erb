@@ -1,10 +1,12 @@
-<h1>Listing runs</h1>
+<h1>Runs</h1>
+<hr>
 
-<table>
+<table class="table table-hover table-striped table-bordered">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
+      <th>RunID</th>
+      <th>Program</th>
+      <th>Success</th>
       <th></th>
     </tr>
   </thead>
@@ -12,14 +14,24 @@
   <tbody>
     <% @runs.each do |run| %>
       <tr>
-        <td><%= link_to 'Show', run %></td>
-        <td><%= link_to 'Edit', edit_run_path(run) %></td>
-        <td><%= link_to 'Destroy', run, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= run.id %></td>
+        <td><%= run.program.name %></td>
+        <td>
+          <% if run.success %>
+            <span class="glyphicon glyphicon glyphicon-ok" style="color: #3c763d;"></span>
+          <% else %>
+            <span class="glyphicon glyphicon glyphicon-remove" style="color: #a94442;"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'View', run %>
+          <% if !run.success %>
+            or <%= link_to 'Delete', run, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Run', new_run_path %>

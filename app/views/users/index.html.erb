@@ -1,1 +1,27 @@
-<h1>Users#index</h1>
+<h1>Leaderboard</h1>
+<hr>
+
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Money</th>
+      <th>Karma</th>
+      <th>Effective Score</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.order('money*karma').each do |user| %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= user.money %> coins</td>
+        <td><%= Float(user.karma) %></td>
+        <td><%= user.score %> coins</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

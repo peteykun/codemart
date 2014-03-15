@@ -13,6 +13,7 @@ module ApplicationHelper
     end
 
     class_name = 'active' if active
+    link_path = '/' + link_path if options[:controller]
 
     content_tag(:li, class: class_name)  do
       link_to link_text, link_path

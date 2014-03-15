@@ -1,4 +1,88 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @post.title %></h1>
+<hr>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= raw BlueCloth.new(@post.content).to_html %>
+  </div>
+</div>
+
+<hr>
+
+<p><b>Program name:</b></p>
+<p><%= @post.program.name %></p>
+
+<br>
+
+<p><b>Program reward:</b></p>
+<p><%= @post.program.reward %> points</p>
+
+<br>
+
+<p><b>Problem statement:</b></p>
+
+<div class="well">
+	<%= raw BlueCloth.new(@post.program.statement).to_html %>
+</div>
+
+<hr>
+
+<p class="pull-left">
+  <% if @post.program.user.eql?(current_user) %>
+    <%= link_to 'Edit post', edit_post_path(@post), class: 'btn btn-primary' %>
+    <%= link_to 'Delete post', @post, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger' %>
+  <% end %>
+</p>
+
+<p class="pull-right left_by">
+	<i>Asked by <b><%= @post.program.user.username %></b> <%= time_ago_in_words @post.created_at %> ago.</i>
+</p>
+
+<br><br><br>
+
+<h2><%= pluralize @post.comments.count, 'Comment' %></h2>
+<hr>
+
+<% for comment in @post.comments.order('id desc') %>
+	<div class="panel panel-default">
+    <div class="panel-body">
+      <%= raw BlueCloth.new(comment.content).to_html %>
+      <hr>
+      <p class="pull-left">
+        <% if comment.user.eql?(current_user) %>
+          <%= link_to 'Edit comment', edit_comment_path(comment), class: 'btn btn-primary' %>
+          <%= link_to 'Delete comment', comment, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger' %>
+        <% else %>
+          <%= link_to 'Report comment', nil, class: 'btn btn-danger' %>
+        <% end %>
+      </p>
+      <p class="pull-right left_by">
+        <i>Response left by <b><%= comment.user.username %></b> <%= time_ago_in_words comment.created_at %> ago.</i>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<h4>Leave a new comment</h4>
+<hr>
+
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_area :content, class: "form-control", style: "height: 100px;" %>
+  </div>
+
+  <div class="actions">
+    <%= f.hidden_field :post_id %>
+    <%= f.submit 'Post reply', class: 'btn btn-success' %>
+  </div>
+<% end %>

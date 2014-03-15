@@ -15,6 +15,10 @@ class RunsController < ApplicationController
   # GET /runs/new
   def new
     @run = Run.new
+
+    if params[:program_id]
+      @run.program_id = params[:program_id]
+    end
   end
 
   # GET /runs/1/edit
@@ -69,6 +73,6 @@ class RunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def run_params
-      params[:run]
+      params.require(:run).permit(:code, :output, :program_id)
     end
 end

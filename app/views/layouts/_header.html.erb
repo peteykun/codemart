@@ -15,6 +15,9 @@
 
         <% if current_user %>
         <%= nav_link 'Programs', 'programs', controller: true %>
+        <%= nav_link 'Runs', 'runs', controller: true %>
+        <%= nav_link 'Forums', 'posts', controller: true %>
+        <%= nav_link 'Leaderboard', 'users', controller: true %>
        
         <%= nav_link 'Logout', logout_path %>
         <% else %>
