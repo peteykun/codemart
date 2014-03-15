@@ -18,7 +18,7 @@ class ProgramsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_programs
-      @programs = Program.where(user_id: session[:user_id])
+      @programs = Program.where(user_id: session[:user_id]).order('reward ASC')
     end
 
     def set_program

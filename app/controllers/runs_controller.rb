@@ -4,7 +4,7 @@ class RunsController < ApplicationController
   # GET /runs
   # GET /runs.json
   def index
-    @runs = Run.all
+    @runs = Run.where(program_id: current_user.programs.ids)
   end
 
   # GET /runs/1
