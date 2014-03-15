@@ -1,0 +1,60 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require bootstrap
+ *= require bootstrap_badges
+ *= require prettify
+ */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  padding-top: 70px;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+}
+
+.alert ul {
+  padding-left: 20px;
+}
+
+.list-group-item-text {
+  font-size: 12px;
+}
+
+.push {
+  min-height: 120px;
+}
+
+.left_by {
+  padding-top: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #EEEEEE;
+  color: #777777;
+}
+
+pre.simple {
+  background-color: #fff !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

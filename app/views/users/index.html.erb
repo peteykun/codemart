@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @users.order('money*karma').each do |user| %>
+    <% @users.order('money*karma DESC').each do |user| %>
       <tr>
         <td><%= user.username %></td>
         <td><%= user.money %> coins</td>

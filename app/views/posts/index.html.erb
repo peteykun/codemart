@@ -5,7 +5,14 @@
   <% @posts.order('id DESC').each do |post| %>
     <%= link_to(post, class: 'list-group-item') do %>
       <span class="badge"><%= post.comments.count %> responses</span>
-      <h4 class="list-group-item-heading"><%= post.title %></h4>
+      <% if post.program.solved %>
+        <span class="badge badge-success badge-break">Solved</span>
+      <% else %>
+        <span class="badge badge-error badge-break">Unsolved</span>
+      <% end %>
+      <h4 class="list-group-item-heading">
+        <%= post.title %>
+      </h4>
       <p class="list-group-item-text">
         <i><%= post.program.name %></i><br>
         Posted by <%= post.program.user.username %>

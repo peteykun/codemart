@@ -29,6 +29,8 @@ class UsersController < ApplicationController
       @user.karma = 1;
       @user.save
 
+      @user.assign_programs
+
       session[:user_id] = @user.id
       redirect_to programs_url
     else
