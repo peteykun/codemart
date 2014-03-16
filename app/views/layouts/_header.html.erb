@@ -7,11 +7,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">CodeMart</a>
+      <a class="navbar-brand" href="/" <%= raw 'style="color: #fff;"' if current_page?('/') %>>CodeMart</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Home' %></li>
 
         <% if current_user %>
         <%= nav_link 'Programs', 'programs', controller: true %>

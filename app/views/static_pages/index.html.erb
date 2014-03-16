@@ -1,0 +1,78 @@
+<h1>Welcome</h1>
+<hr>
+
+<div style="width: 710px; float: left; border: 1px solid #ccc; padding: 30px;">
+  <img src="<%= image_url('travelling_salesman_problem.png') %>" style="margin: 20px auto; display: block;">
+  
+  <hr>
+
+  <p style="width: 90%; display: block; margin: 0 auto; text-align: justify;">Welcome to CodeMart, a coding event with a twist. In the age of freelancing, and what matters at the end of the day is not just how well you can code but how well you can get others to code for you! Decide whether you want to take on the programs you'll get, or solve others' programs &mdash; at the end of the day, what matters is your balance!</p>
+</div>
+
+<div style="float:right">
+
+  <div style="width: 400px; padding: 30px; border: 1px solid #ccc; text-align: center;">
+    <% if !current_user %>
+      <%= form_tag sessions_path do |f| %>
+
+        <% if !@error.nil? %>
+          <div class="alert alert-danger">
+            <%= @error %>
+          </div>
+        <% end %>
+      
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">Username</span>
+            <%= text_field_tag :username, nil, class: "form-control" %>
+          </div>        
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <%= password_field_tag :password, nil, class: "form-control" %>
+          </div>        
+        </div>
+
+        <div class="actions">
+          <div class="btn-group-vertical" style="width: 100%;">
+            <%= submit_tag "Login", class: 'btn btn-default' %>
+            <%= link_to "Register", register_path, class: 'btn btn-default', type: 'button' %>
+          </div>
+        </div>
+
+      <% end %>
+    <% else %>
+      <div style="margin: 45px auto;">
+        Welcome back, <%= current_user.username %>!<br><br>
+        <div class="btn-group-vertical" style="width: 100%;">
+          <%= link_to "Logout", logout_path, class: 'btn btn-default', type: 'button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="width: 400px; border: 1px solid #ccc; padding: 30px; text-align: center; color: #5cb85c; margin-top: 20px;">
+    <button type="button" class="btn btn-success btn-lg" style="padding-right: 40px !important;">
+      <span class="glyphicon glyphicon-download" style="margin-top: 5px; margin-right: 20px !important; float: left;"></span> Download MartSubmit<br>
+      <div style="font-size: 11px; margin-left: 20px;">English (US) &bull; <%= get_operating_system %></div>
+    </button><br><br>
+
+    <p style="color: #666; font-size: 12px;">
+      This program is distributed under the <%= link_to 'MIT license', 'http://opensource.org/licenses/MIT' %>.
+    </p>
+
+    <p style="color: #ccc; font-size: 7px; text-align: justify; width: 90%; margin: 0 auto; display: block;">
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+      THE SOFTWARE.
+    </p>
+  </div>
+
+</div>

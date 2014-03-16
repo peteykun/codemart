@@ -31,6 +31,10 @@ class CommentsController < ApplicationController
 
       current_user.money -= @comment.price
       current_user.save
+
+      comment_writer = @comment.user
+      comment_writer.money += @comment.price
+      comment_writer.save
     end
   end
 

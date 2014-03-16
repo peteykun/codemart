@@ -3,6 +3,8 @@ class Run < ActiveRecord::Base
   before_save    :test
   before_destroy :prevent_destroy_if_success
 
+  validates_presence_of :code, :output, :program
+
   def test
     self.success = check
 

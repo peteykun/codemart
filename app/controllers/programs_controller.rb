@@ -7,7 +7,7 @@ class ProgramsController < ApplicationController
   def index
     respond_to do |format|
       format.html { redirect_to program_path Program.where(user_id: session[:user_id]).first }
-      format.json
+      format.json {  }
     end
   end
 
@@ -18,7 +18,15 @@ class ProgramsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_programs
-      @programs = Program.where(user_id: session[:user_id]).order('reward ASC')
+      if session[:user_id]
+        @programs = Program.where(user_id: session[:user_id]).order('reward ASC')
+      elsif params[:username] && params[:password]
+        user = User.find_by_username(params[:username])
+
+        if user && user.authenticate(params[:password])
+          @programs = Program.where(user_id: user.id).order('reward ASC')
+        end
+      end
     end
 
     def set_program
@@ -27,7 +35,7 @@ class ProgramsController < ApplicationController
 
     def redirect_if_not_logged_in
       if !current_user
-        redirect_to login_url
+        redirect_to login_url unless !params[:username].nil?
       end
     end
 

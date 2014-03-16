@@ -1,7 +1,9 @@
 CodeMart::Application.routes.draw do
+  get "static_pages/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root 'users#index'
+  
+  root 'static_pages#index'
 
   resources :users
   resources :programs
