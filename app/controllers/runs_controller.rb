@@ -29,14 +29,21 @@ class RunsController < ApplicationController
   # POST /runs.json
   def create
     @run = Run.new(run_params)
+    
+    user = User.find_by_username(params[:username])
+
+    @app_key_matched = AppKey.where(key: params[:app_key]).count != 0
+    @belongs_to_user = @run.program.user == user
+    @user_authenticated = (user != nil && user.authenticate(params[:password]))
 
     respond_to do |format|
-      if @run.save
+      if @app_key_matched && @belongs_to_user && @user_authenticated
+        @run.save
         format.html { redirect_to @run, notice: 'Run was successfully created.' }
         format.json { render action: 'show', status: :created, location: @run }
       else
         format.html { render action: 'new' }
-        format.json { render json: @run.errors, status: :unprocessable_entity }
+        format.json { head 403 }
       end
     end
   end

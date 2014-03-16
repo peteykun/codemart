@@ -7,7 +7,9 @@ class ProgramsController < ApplicationController
   def index
     respond_to do |format|
       format.html { redirect_to program_path Program.where(user_id: session[:user_id]).first }
-      format.json {  }
+      format.json {
+        @app_key_matched = AppKey.where(key: params[:app_key]).count != 0
+      }
     end
   end
 
