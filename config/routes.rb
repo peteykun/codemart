@@ -1,9 +1,9 @@
 CodeMart::Application.routes.draw do
-  get "static_pages/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
   root 'static_pages#index'
+  mathjax 'mathjax'
 
   resources :users
   resources :programs
@@ -11,6 +11,7 @@ CodeMart::Application.routes.draw do
   resources :posts
   resources :comments
   resources :sessions
+  resources :transactions
 
   match '/register',  to: 'users#new',          via: 'get'
   match '/login',     to: 'sessions#new',       via: 'get'

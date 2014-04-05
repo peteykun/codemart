@@ -17,6 +17,6 @@
   <a class="btn btn-warning" href="#" role="button"><span class="glyphicon glyphicon glyphicon-gift"></span> <%= @program.reward.to_s %> coins obtained</a>
 <% else %>
   <a class="btn btn-default" href="#" role="button"><span class="glyphicon glyphicon glyphicon-gift"></span> <%= @program.reward.to_s %> coins up for grabs</a>
-  <%= link_to 'Submit Output', new_run_path(program_id: @program.id), class: 'btn btn-success', role: 'button' %>
+  <%# link_to 'Submit Output', new_run_path(program_id: @program.id), class: 'btn btn-success', role: 'button' %>
   <%= link_to 'Request Help', new_post_path(program_id: @program.id), class: 'btn btn-danger', role: 'button' %>
 <% end %>

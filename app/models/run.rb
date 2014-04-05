@@ -11,12 +11,22 @@ class Run < ActiveRecord::Base
     if self.success
       p = self.program
       u = p.user
+      
+      u.lock!
 
-      u.money += program.reward unless program.solved
+      unless program.solved
+        u.money += program.reward 
+        t = Transaction.new
+        t.debitor = nil
+        t.credited = u
+        t.amount = program.reward
+        t.description = "Solved the program: " + program.name
+        t.save
+      end
       p.solved = true
 
-      u.save
       p.save
+      u.save!
     end
 
     true

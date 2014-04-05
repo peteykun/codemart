@@ -8,10 +8,10 @@ group :development do
 end
 
 group :production do
-  gem 'pg', '0.15.1'
   gem 'rails_12factor'
 end
 
+gem 'pg', '0.15.1'
 gem 'sass-rails', '~> 4.0.0'
 gem 'font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
@@ -29,3 +29,5 @@ gem 'bootstrap-sass'
 gem 'bluecloth'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'friendly_id', '~> 5.0.0'
+gem 'unicorn'
+gem 'mathjax-rails'

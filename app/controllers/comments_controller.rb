@@ -21,22 +21,34 @@ class CommentsController < ApplicationController
   def edit
   end
 
-  def buy
-    @own = @comment.have_rights?(current_user)
-    @enough_money = current_user.money >= @comment.price
-    
-    if !@own and @enough_money
-      @comment.buyers << current_user
-      @comment.save
+    def buy
+      @own = @comment.have_rights?(current_user)
+      @enough_money = current_user.money >= @comment.price
+      
+      if !@own and @enough_money
+        @comment.buyers << current_user
+        @comment.save
 
-      current_user.money -= @comment.price
-      current_user.save
+        User.transaction do
+          comment_writer = @comment.user
+          comment_writer.lock!
+          current_user.lock!
+          
+          current_user.money -= @comment.price
+          current_user.save!
 
-      comment_writer = @comment.user
-      comment_writer.money += @comment.price
-      comment_writer.save
+          comment_writer.money += @comment.price
+          comment_writer.save!
+
+          t = Transaction.new
+          t.debitor = current_user
+          t.credited = comment_writer
+          t.amount = @comment.price
+          t.description = "Bought " + comment_writer.username + "'s comment"
+          t.save
+        end
+      end
     end
-  end
 
   def report
     @comment.reported = true

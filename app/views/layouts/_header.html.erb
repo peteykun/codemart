@@ -25,6 +25,11 @@
         <%= nav_link 'Register', register_path %>
         <% end %>
       </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <%= nav_link 'Transactions (' + current_user.money.to_s + ' coins)', 'transactions', controller: true if current_user %>
+      </ul>
+
     </div>
   </div>
 </div>
